@@ -39,32 +39,13 @@ const portfolioData = {
       liveDemo: null,
     },
   ],
-  // This is placeholder data. In a real app, you would fetch this from your headless CMS.
-  blogPosts: [
-    {
-      id: 1,
-      title: "Understanding Attention Mechanisms in Transformers",
-      date: "July 15, 2025",
-      excerpt:
-        "The transformer architecture has revolutionized NLP, and at its core is the attention mechanism. This post breaks down how self-attention works, with illustrations and code snippets...",
-      link: "/blog/understanding-attention",
-    },
-    {
-      id: 2,
-      title: "A Practical Guide to ML Model Deployment",
-      date: "June 28, 2025",
-      excerpt:
-        "Building a model is one thing, but deploying it to production is another. We explore various strategies from simple containerization with Docker to serverless deployments on cloud platforms...",
-      link: "/blog/ml-deployment-guide",
-    },
-  ],
   contact: {
-    email: "your.email@example.com",
+    email: "ashish.raj.dev04@gmail.com",
   },
   socials: {
-    github: "https://github.com/your-username",
-    linkedin: "https://linkedin.com/in/your-username",
-    twitter: "https://twitter.com/your-username",
+    github: "https://github.com/AshishRaj04",
+    linkedin: "https://linkedin.com/in/i-ashish-raj",
+    twitter: "https://twitter.com/adven_raj",
   },
 };
 

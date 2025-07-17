@@ -1,41 +1,71 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import portfolioData from "../content";
 
 const Navbar = ({ activeSection, setActiveSection }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const navLinks = ['About', 'Projects', 'Blog', 'Contact'];
+  const location = useLocation();
 
+  // Only scroll to section if on home page
   const handleLinkClick = (section) => {
-    setActiveSection(section);
+    if (location.pathname === "/") {
+      setActiveSection(section);
+    }
     setIsOpen(false);
   };
+
+  const navLinks = [
+    { name: "About", type: "section" },
+    { name: "Projects", type: "page", to: "/projects" },
+    { name: "Blog", type: "page", to: "/blogs" },
+    { name: "Contact", type: "section" },
+  ];
 
   return (
     <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-40 w-full border-b border-gray-200">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <a href="#" onClick={() => handleLinkClick('About')} className="text-2xl font-bold text-gray-800 hover:text-indigo-600 transition-colors">
+            <Link
+              to="/"
+              onClick={() => handleLinkClick("About")}
+              className="text-2xl font-bold text-gray-800 hover:text-indigo-600 transition-colors"
+            >
               {portfolioData.name}
-            </a>
+            </Link>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  onClick={() => handleLinkClick(link)}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    activeSection === link
-                      ? 'text-white bg-indigo-600'
-                      : 'text-gray-700 hover:bg-indigo-50 hover:text-indigo-700'
-                  }`}
-                >
-                  {link}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.type === "section" ? (
+                  <a
+                    key={link.name}
+                    href={`/#${link.name.toLowerCase()}`}
+                    onClick={() => handleLinkClick(link.name)}
+                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      activeSection === link.name
+                        ? "text-white bg-indigo-600"
+                        : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-700"
+                    }`}
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.to}
+                    onClick={() => setIsOpen(false)}
+                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      location.pathname === link.to
+                        ? "text-white bg-indigo-600"
+                        : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-700"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              )}
             </div>
           </div>
           <div className="-mr-2 flex md:hidden">
@@ -47,7 +77,11 @@ const Navbar = ({ activeSection, setActiveSection }) => {
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
-              {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
+              {isOpen ? (
+                <X className="block h-6 w-6" />
+              ) : (
+                <Menu className="block h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -56,24 +90,40 @@ const Navbar = ({ activeSection, setActiveSection }) => {
       {isOpen && (
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                onClick={() => handleLinkClick(link)}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                  activeSection === link
-                    ? 'text-white bg-indigo-600'
-                    : 'text-gray-700 hover:bg-indigo-50 hover:text-indigo-700'
-                }`}
-              >
-                {link}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.type === "section" ? (
+                <a
+                  key={link.name}
+                  href={`/#${link.name.toLowerCase()}`}
+                  onClick={() => handleLinkClick(link.name)}
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    activeSection === link.name
+                      ? "text-white bg-indigo-600"
+                      : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-700"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.to}
+                  onClick={() => setIsOpen(false)}
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    location.pathname === link.to
+                      ? "text-white bg-indigo-600"
+                      : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-700"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              )
+            )}
           </div>
         </div>
       )}
     </nav>
   );
 };
+
 export default Navbar;

@@ -17,6 +17,11 @@ const postType = defineType({
       validation: function(rule) { return rule.required(); },
     }),
     defineField({
+      name: 'excerpt',
+      type: 'text',
+      validation: function(rule) { return rule.required().min(20).max(200); },
+    }),
+    defineField({
       name: 'publishedAt',
       type: 'datetime',
       initialValue: function() { return new Date().toISOString(); },

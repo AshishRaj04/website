@@ -30,26 +30,26 @@ const Blog = () => {
           ) : (
             posts.map((post) => (
               <div
-                key={post.id}
+                key={post._id}
                 className="flex flex-col rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300"
               >
                 <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                   <div className="flex-1">
                     <p className="text-sm font-medium text-indigo-600">
-                      <time dateTime={post.date}>{post.date}</time>
+                      {new Date(post.publishedAt).toLocaleDateString()}
                     </p>
-                    <a href={post.link} className="block mt-2">
+                    <a href={`/posts/${post.slug.current}`} className="block mt-2">
                       <p className="text-xl font-semibold text-gray-900">
                         {post.title}
                       </p>
                       <p className="mt-3 text-base text-gray-600">
-                        {post.excerpt}
+                        {post.excerpt || post.body[0]?.children[0]?.text || "No excerpt available."}
                       </p>
                     </a>
                   </div>
                   <div className="mt-6">
                     <a
-                      href={post.link}
+                      href={`/posts/${post.slug.current}`}
                       className="text-base font-semibold text-indigo-600 hover:text-indigo-800"
                     >
                       Read full story
