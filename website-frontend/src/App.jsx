@@ -70,12 +70,11 @@ export default function App() {
                 <div ref={sections.About}>
                   <About />
                 </div>
-                <div ref={sections.Contact}>
-                  <Contact />
-                </div>
+                
               </>
             }
           />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/blogs" element={<Blog />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/posts/:slug" element={<PostPage />} />

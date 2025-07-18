@@ -16,17 +16,19 @@ const Blog = () => {
   }, []);
 
   return (
-    <section id="blog" className="py-20 sm:py-24">
+    <section id="blog" className="py-20 sm:py-24 font-sans">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">
           From the Blog
         </h2>
-        <p className="mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto">
+        <p className="mt-4 text-lg text-gray-700 text-center max-w-2xl mx-auto">
           My thoughts on AI, machine learning, and software engineering.
         </p>
         <div className="mt-12 max-w-lg mx-auto grid gap-8 lg:grid-cols-2 lg:max-w-none">
           {loading ? (
-            <p className="text-center col-span-2">Loading posts...</p>
+            <p className="text-center col-span-2 text-gray-700">
+              Loading posts...
+            </p>
           ) : (
             posts.map((post) => (
               <div
@@ -35,17 +37,17 @@ const Blog = () => {
               >
                 <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-indigo-600">
+                    <p className="text-sm font-medium text-gray-600">
                       {new Date(post.publishedAt).toLocaleDateString()}
                     </p>
                     <a
                       href={`/posts/${post.slug.current}`}
                       className="block mt-2"
                     >
-                      <p className="text-xl font-semibold text-gray-900">
+                      <p className="text-xl font-semibold text-gray-900 hover:text-green-600 transition-colors">
                         {post.title}
                       </p>
-                      <p className="mt-3 text-base text-gray-600">
+                      <p className="mt-3 text-base text-gray-700">
                         {post.excerpt ||
                           post.body?.[0]?.children?.[0]?.text ||
                           "No excerpt available."}
@@ -55,7 +57,7 @@ const Blog = () => {
                   <div className="mt-6">
                     <a
                       href={`/posts/${post.slug.current}`}
-                      className="text-base font-semibold text-indigo-600 hover:text-indigo-800"
+                      className="text-base font-semibold text-green-600 hover:text-green-500 transition-colors"
                     >
                       Read full story
                     </a>
