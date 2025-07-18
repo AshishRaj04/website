@@ -1,3 +1,3 @@
 import { postType } from "./postType";
-
-export const schemaTypes = [postType]
+import {projectType} from "./projectType";
+export const schemaTypes = [postType , projectType]

@@ -39,6 +39,29 @@ const portfolioData = {
       liveDemo: null,
     },
   ],
+  services: [
+    {
+      title: "Machine Learning",
+      role: "I love training machine learning models on variety of datasets . The process of finding the right algorithm and hyperparameters is always exciting for me.  ",
+      tools: ["Python", "TensorFlow", "Scikit-learn", "Jupyter Notebook"],
+    },
+    {
+      title: "Data Science",
+      role: "Playing with raw data is my 90% work. The insights I get from data is always a surprise for me. Data Augmentation is my  favorite part of data science.",
+
+      tools: ["Python", "Pandas", "NumPy", "Matplotlib"],
+    },
+    {
+      title: "React Frontend Development",
+      role: "I love building responsive and interactive user interfaces using React. React  is my go to library for building frontend applications.",
+      tools: ["React", "JavaScript", "Tailwind", "HTML/CSS"],
+    },
+    {
+      title: "UI Design",
+      role: "In my spare time , I love to create UI designs for various applications and websites that I build . My style is not to fancy  but simple and clean . ",
+      tools: ["Figma", "Figjam"],
+    },
+  ],
   contact: {
     email: "ashish.raj.dev04@gmail.com",
   },

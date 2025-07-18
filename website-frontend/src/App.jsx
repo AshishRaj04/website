@@ -1,18 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import About from "./components/About";
+import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import Blog from "./components/Blog";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import PostPage from "./components/[slug]/page";
+import About from "./components/About";
 
 export default function App() {
   const [activeSection, setActiveSection] = useState("About");
   const sections = {
-    About: useRef(null),
+    Hero: useRef(null),
     Contact: useRef(null),
+    About: useRef(null),
   };
 
   useEffect(() => {
@@ -62,6 +64,9 @@ export default function App() {
             path="/"
             element={
               <>
+                <div ref={sections.Hero}>
+                  <Hero />
+                </div>
                 <div ref={sections.About}>
                   <About />
                 </div>

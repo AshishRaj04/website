@@ -16,7 +16,7 @@ const Navbar = ({ activeSection, setActiveSection }) => {
   };
 
   const navLinks = [
-    { name: "About", type: "section" },
+    { name: "Home", to: "/" },
     { name: "Projects", type: "page", to: "/projects" },
     { name: "Blog", type: "page", to: "/blogs" },
     { name: "Contact", type: "section" },

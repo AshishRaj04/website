@@ -38,12 +38,17 @@ const Blog = () => {
                     <p className="text-sm font-medium text-indigo-600">
                       {new Date(post.publishedAt).toLocaleDateString()}
                     </p>
-                    <a href={`/posts/${post.slug.current}`} className="block mt-2">
+                    <a
+                      href={`/posts/${post.slug.current}`}
+                      className="block mt-2"
+                    >
                       <p className="text-xl font-semibold text-gray-900">
                         {post.title}
                       </p>
                       <p className="mt-3 text-base text-gray-600">
-                        {post.excerpt || post.body[0]?.children[0]?.text || "No excerpt available."}
+                        {post.excerpt ||
+                          post.body?.[0]?.children?.[0]?.text ||
+                          "No excerpt available."}
                       </p>
                     </a>
                   </div>
@@ -64,4 +69,5 @@ const Blog = () => {
     </section>
   );
 };
+
 export default Blog;
