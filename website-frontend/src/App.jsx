@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, Suspense, lazy } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
@@ -9,6 +11,7 @@ import About from "./components/About";
 import ScrollToTop from "./components/ScrollToTop";
 import LoadingSpinner from "./components/LoadingSpinner";
 import SEO from "./components/SEO";
+
 
 // Lazy load components
 const Projects = lazy(() => import("./components/Projects"));
@@ -124,6 +127,8 @@ export default function App() {
           </AnimatePresence>
         </main>
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </div>
     </HelmetProvider>
   );
