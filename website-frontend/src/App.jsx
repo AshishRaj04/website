@@ -1,16 +1,25 @@
-import { useState, useRef, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useState, useRef, useEffect, Suspense, lazy } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Projects from "./components/Projects";
-import Blog from "./components/Blog";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import PostPage from "./components/[slug]/page";
 import About from "./components/About";
+import ScrollToTop from "./components/ScrollToTop";
+import LoadingSpinner from "./components/LoadingSpinner";
+import SEO from "./components/SEO";
+
+// Lazy load components
+const Projects = lazy(() => import("./components/Projects"));
+const Blog = lazy(() => import("./components/Blog"));
+const Contact = lazy(() => import("./components/Contact"));
+const PostPage = lazy(() => import("./components/[slug]/page"));
 
 export default function App() {
   const [activeSection, setActiveSection] = useState("About");
+  const location = useLocation();
+  
   const sections = {
     Hero: useRef(null),
     Contact: useRef(null),
@@ -49,38 +58,73 @@ export default function App() {
 
   const handleSetActiveSection = (section) => {
     setActiveSection(section);
-    sections[section].current.scrollIntoView({ behavior: "smooth" });
+    if (sections[section]?.current) {
+      sections[section].current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
-    <div className="bg-white font-sans">
-      <Navbar
-        activeSection={activeSection}
-        setActiveSection={handleSetActiveSection}
-      />
-      <main>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <div ref={sections.Hero}>
-                  <Hero />
-                </div>
-                <div ref={sections.About}>
-                  <About />
-                </div>
-                
-              </>
-            }
-          />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blogs" element={<Blog />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/posts/:slug" element={<PostPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <HelmetProvider>
+      <div className="bg-white font-sans min-h-screen flex flex-col">
+        <SEO />
+        <ScrollToTop />
+        <Navbar
+          activeSection={activeSection}
+          setActiveSection={handleSetActiveSection}
+        />
+        <main className="flex-grow">
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <div ref={sections.Hero} id="hero">
+                      <Hero />
+                    </div>
+                    <div ref={sections.About} id="about">
+                      <About />
+                    </div>
+                  </>
+                }
+              />
+              <Route
+                path="/contact"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Contact />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/blogs"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Blog />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/projects"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Projects />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/posts/:slug"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <PostPage />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </AnimatePresence>
+        </main>
+        <Footer />
+      </div>
+    </HelmetProvider>
   );
 }
