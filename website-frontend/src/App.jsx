@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Link } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -67,6 +67,18 @@ export default function App() {
                 <Suspense fallback={<LoadingSpinner />}>
                   <PostPage />
                 </Suspense>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <div className="flex flex-col items-center justify-center py-20 text-center">
+                  <h1 className="text-4xl font-bold text-zinc-900 mb-4">404</h1>
+                  <p className="text-zinc-500 mb-6">This page doesn't exist.</p>
+                  <Link to="/" className="text-zinc-900 font-semibold hover:text-zinc-500 transition-colors">
+                    ← Back to Home
+                  </Link>
+                </div>
               }
             />
           </Routes>

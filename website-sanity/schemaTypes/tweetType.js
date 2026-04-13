@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const tweetType = defineType({
   name: 'tweet',
@@ -6,11 +6,16 @@ export const tweetType = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'content',
       title: 'Content',
       type: 'text',
       description: 'The main text of your note/tweet',
-      validation: (Rule) => Rule.required().max(500),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'author',
@@ -46,7 +51,7 @@ export const tweetType = defineType({
       media: 'image',
       subtitle: 'publishedAt',
     },
-    prepare({title, media, subtitle}) {
+    prepare({ title, media, subtitle }) {
       return {
         title: title ? (title.substring(0, 40) + (title.length > 40 ? '...' : '')) : 'New Note',
         media,

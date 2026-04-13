@@ -30,7 +30,7 @@ const portfolioData = {
   socials: {
     github: "https://github.com/AshishRaj04",
     linkedin: "https://linkedin.com/in/i-ashish-raj",
-    twitter: "https://twitter.com/adven_raj",
+    twitter: "https://x.com/adven_raj",
   },
 };
 

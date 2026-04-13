@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imashish.vercel.app/sitemap.xml

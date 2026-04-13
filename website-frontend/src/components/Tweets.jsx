@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import imageUrlBuilder from "@sanity/image-url";
 import { client } from "../sanity/client";
 
 const TWEETS_QUERY = `*[_type == "tweet"]|order(publishedAt desc){
@@ -10,12 +9,6 @@ const TWEETS_QUERY = `*[_type == "tweet"]|order(publishedAt desc){
   link,
   "imageUrl": image.asset->url
 }`;
-
-const builder = imageUrlBuilder(client);
-
-function urlFor(source) {
-  return builder.image(source);
-}
 
 const Tweets = () => {
   const [tweets, setTweets] = useState([]);
