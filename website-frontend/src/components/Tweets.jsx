@@ -3,6 +3,7 @@ import { client } from "../sanity/client";
 
 const TWEETS_QUERY = `*[_type == "tweet"]|order(publishedAt desc){
   _id,
+  title,
   content,
   author,
   publishedAt,
@@ -36,7 +37,7 @@ const Tweets = () => {
           {tweets.map((tweet) => (
             <article key={tweet._id} className="flex flex-col gap-4 border border-zinc-200 p-6 bg-white hover:border-zinc-300 transition-colors">
               <div className="flex justify-between items-baseline border-b border-zinc-100 pb-3">
-                <span className="font-bold text-zinc-900 text-lg">{tweet.author || "Ashish Raj"}</span>
+                <span className="font-bold text-zinc-900 text-lg">{tweet.title}</span>
                 <time className="text-xs text-zinc-500 font-semibold tracking-wide uppercase">
                   {new Date(tweet.publishedAt).toLocaleDateString('en-US', {
                     month: 'short',
@@ -67,6 +68,7 @@ const Tweets = () => {
                   </a>
                 </div>
               )}
+              <span className="font-bold text-zinc-900 text-lg">{tweet.author}</span>
             </article>
           ))}
           {tweets.length === 0 && (
