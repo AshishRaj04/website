@@ -33,7 +33,7 @@ export default function App() {
               element={
                 <div className="flex flex-col gap-10 md:gap-14">
                   <Hero />
-                  <About />
+                  {/* <About /> */}
                 </div>
               }
             />
