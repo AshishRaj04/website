@@ -17,12 +17,18 @@ const Blog = lazy(() => import("./components/Blog"));
 const Tweets = lazy(() => import("./components/Tweets"));
 const PostPage = lazy(() => import("./components/[slug]/page"));
 
+function getContainerClass(pathname) {
+  if (pathname === '/notes') return 'max-w-6xl';
+  if (pathname === '/projects') return 'max-w-5xl';
+  return 'max-w-2xl';
+}
+
 export default function App() {
   const location = useLocation();
 
   return (
     <HelmetProvider>
-      <div className="max-w-2xl mx-auto px-5 py-8 md:py-12 min-h-screen flex flex-col font-sans">
+      <div className={`${getContainerClass(location.pathname)} mx-auto px-5 py-8 md:py-12 min-h-screen flex flex-col font-sans transition-all duration-300`}>
         <SEO />
         <ScrollToTop />
         <Navbar />

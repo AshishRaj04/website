@@ -3,6 +3,7 @@ import { client } from "../sanity/client";
 const BLOG_POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
+  && status == "Published"
 ]|order(publishedAt desc)[0...12]{
   _id, 
   title, 
@@ -10,6 +11,7 @@ const BLOG_POSTS_QUERY = `*[
   publishedAt, 
   body, 
   excerpt,
+  status,
   "imageUrl": image.asset->url
 }`;
 

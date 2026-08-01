@@ -1,11 +1,11 @@
 const portfolioData = {
   name: "Ashish Raj",
-  title: "ML Engineer | Optimizing the hell out of transformers.",
+  title: "Machine Learning Engineer",
   about: {
     intro:
-      "I like to train deep neural networks on large datasets.",
+      "I like solving difficult AI engineering problems—from training Transformers from scratch to building physics-guided neural networks.",
     focus:
-      "At the moment, I'm probably thinking about the question whose answer is 42",
+      "Building foundation models, scientific AI, and production inference systems.",
   },
   services: [
     {

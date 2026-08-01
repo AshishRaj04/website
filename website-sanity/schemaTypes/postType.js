@@ -47,7 +47,7 @@ const postType = defineType({
     defineField({
       name: 'body',
       type: 'array',
-      of: [{ type: 'block' }, { type: 'image' }, { type: 'code' }],
+      of: [{ type: 'block' }, { type: 'image' }, { type: 'code' }, { type: 'table' }],
     }),
   ],
 });

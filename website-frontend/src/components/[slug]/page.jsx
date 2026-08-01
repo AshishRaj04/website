@@ -14,6 +14,82 @@ function urlFor(source) {
   return builder.image(source);
 }
 
+/**
+ * Detects and parses markdown table syntax into structured data.
+ * Handles standard markdown tables with | delimiters and --- separator rows.
+ */
+function parseMarkdownTable(text) {
+  const lines = text.trim().split('\n').filter(line => line.trim());
+  if (lines.length < 2) return null;
+
+  // Check if lines look like a markdown table
+  const isTableLine = (line) => line.trim().startsWith('|') && line.trim().endsWith('|');
+  const isSeparator = (line) => /^\|[\s\-:|]+\|$/.test(line.trim());
+
+  if (!lines.every(isTableLine)) return null;
+  
+  // Find separator row
+  const sepIndex = lines.findIndex(isSeparator);
+  if (sepIndex < 1) return null;
+
+  const parseRow = (line) =>
+    line.trim().slice(1, -1).split('|').map(cell => cell.trim());
+
+  const headers = parseRow(lines[0]);
+  
+  // Parse alignment from separator
+  const sepCells = parseRow(lines[sepIndex]);
+  const alignments = sepCells.map(cell => {
+    if (cell.startsWith(':') && cell.endsWith(':')) return 'center';
+    if (cell.endsWith(':')) return 'right';
+    return 'left';
+  });
+
+  const rows = lines
+    .slice(sepIndex + 1)
+    .filter(line => !isSeparator(line))
+    .map(parseRow);
+
+  return { headers, rows, alignments };
+}
+
+function MarkdownTable({ data }) {
+  return (
+    <div className="my-8 overflow-x-auto border border-zinc-200 rounded-sm">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-zinc-200 bg-zinc-50">
+            {data.headers.map((header, i) => (
+              <th
+                key={i}
+                className="px-4 py-2.5 text-left font-semibold text-zinc-900 text-xs uppercase tracking-wider"
+                style={{ textAlign: data.alignments[i] }}
+              >
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.rows.map((row, i) => (
+            <tr key={i} className={`border-b border-zinc-100 ${i % 2 === 1 ? 'bg-zinc-50/50' : ''}`}>
+              {row.map((cell, j) => (
+                <td
+                  key={j}
+                  className="px-4 py-2 text-zinc-700"
+                  style={{ textAlign: data.alignments[j] || 'left' }}
+                >
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 const ptComponents = {
   types: {
     image: ({ value }) => {
@@ -34,17 +110,54 @@ const ptComponents = {
         </figure>
       );
     },
-    code: ({ value }) => (
-      <div className="my-8 rounded-sm border border-zinc-200 overflow-hidden text-sm">
-        <SyntaxHighlighter 
-          language={value.language || 'text'} 
-          style={oneLight}
-          customStyle={{ margin: 0, padding: '1.25rem', background: '#fafafa', fontSize: '13px' }}
-        >
-          {value.code}
-        </SyntaxHighlighter>
-      </div>
-    ),
+    code: ({ value }) => {
+      // Check if the code block is actually a markdown table
+      const tableData = parseMarkdownTable(value.code || '');
+      if (tableData) {
+        return <MarkdownTable data={tableData} />;
+      }
+
+      return (
+        <div className="my-8 rounded-sm border border-zinc-200 overflow-hidden text-sm">
+          <SyntaxHighlighter 
+            language={value.language || 'text'} 
+            style={oneLight}
+            customStyle={{ margin: 0, padding: '1.25rem', background: '#fafafa', fontSize: '13px' }}
+          >
+            {value.code}
+          </SyntaxHighlighter>
+        </div>
+      );
+    },
+    table: ({ value }) => {
+      if (!value?.rows || value.rows.length === 0) return null;
+      const headerRow = value.rows[0];
+      const bodyRows = value.rows.slice(1);
+      return (
+        <div className="my-8 overflow-x-auto border border-zinc-200 rounded-sm">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-zinc-200 bg-zinc-50">
+                {headerRow.cells.map((cell, i) => (
+                  <th key={i} className="px-4 py-2.5 text-left font-semibold text-zinc-900 text-xs uppercase tracking-wider">
+                    {cell}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {bodyRows.map((row, i) => (
+                <tr key={i} className={`border-b border-zinc-100 ${i % 2 === 1 ? 'bg-zinc-50/50' : ''}`}>
+                  {row.cells.map((cell, j) => (
+                    <td key={j} className="px-4 py-2 text-zinc-700">{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
   },
 
   marks: {
@@ -183,4 +296,3 @@ export default function PostPage() {
     </article>
   );
 }
-
