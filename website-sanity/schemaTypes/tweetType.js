@@ -11,10 +11,16 @@ export const tweetType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category / Topic',
+      type: 'string',
+      description: 'Optional category tag (e.g. Systems, Deep Learning, ML Engineering)',
+    }),
+    defineField({
       name: 'content',
       title: 'Content',
       type: 'text',
-      description: 'The main text of your note/tweet',
+      description: 'The main text of your note/tweet (supports Markdown formatting)',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -44,19 +50,27 @@ export const tweetType = defineType({
       type: 'url',
       description: 'Optional URL if this note references something external',
     }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
   ],
   preview: {
     select: {
-      title: 'content',
+      title: 'title',
+      content: 'content',
       media: 'image',
       subtitle: 'publishedAt',
     },
-    prepare({ title, media, subtitle }) {
+    prepare({ title, content, media, subtitle }) {
       return {
-        title: title ? (title.substring(0, 40) + (title.length > 40 ? '...' : '')) : 'New Note',
+        title: title || (content ? content.substring(0, 40) + '...' : 'New Note'),
         media,
         subtitle: subtitle ? new Date(subtitle).toLocaleDateString() : 'Draft',
       }
     },
   },
 })
+

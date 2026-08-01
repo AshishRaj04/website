@@ -17,6 +17,19 @@ const postType = defineType({
       validation: function(rule) { return rule.required(); },
     }),
     defineField({
+      name: 'status',
+      title: 'Status',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Published', value: 'Published' },
+          { title: 'Draft', value: 'Draft' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'Published',
+    }),
+    defineField({
       name: 'excerpt',
       type: 'text',
       validation: function(rule) { return rule.required().min(20).max(200); },
@@ -39,4 +52,4 @@ const postType = defineType({
   ],
 });
 
-export { postType };
+export { postType };

@@ -1,0 +1,192 @@
+{
+    "hero": {
+        "name": "Ashish Raj",
+        "title": "Machine Learning Engineer",
+        "subtitle": "Building foundation models, scientific AI, and production inference systems.",
+        "tagline": "I like solving difficult AI engineering problems—from training Transformers from scratch to building physics-guided neural networks.",
+        "cta": [
+            {
+                "text": "Projects",
+                "href": "#projects"
+            },
+            {
+                "text": "Research",
+                "href": "#research"
+            }
+        ]
+    },
+    "sections": [
+        {
+            "id": "currently",
+            "title": "Currently",
+            "type": "timeline",
+            "items": [
+                {
+                    "date": "2026",
+                    "title": "Machine Learning Engineer",
+                    "description": "Building computer vision systems for automated solar panel inspection."
+                },
+                {
+                    "date": "2026",
+                    "title": "NyayAI",
+                    "description": "Transforming NyayAI from a custom legal foundation model into an AI research workspace for Indian legal professionals."
+                },
+                {
+                    "date": "2026",
+                    "title": "GeoNet v4",
+                    "description": "Researching physics-guided seismic inversion by combining deep learning with acoustic wave propagation."
+                }
+            ]
+        },
+        {
+            "id": "projects",
+            "title": "Selected Projects",
+            "type": "cards",
+            "items": [
+                {
+                    "title": "NyayAI",
+                    "category": "Foundation Models",
+                    "headline": "Built a 103M parameter Transformer from scratch.",
+                    "description": "Designed tokenizer, architecture, distributed training pipeline, inference engine and legal RAG stack.",
+                    "metrics": [
+                        "103M parameters",
+                        "269M legal tokens",
+                        "Custom GPT architecture",
+                        "Distributed A100 training"
+                    ],
+                    "links": [
+                        "GitHub",
+                        "Blog",
+                        "Demo"
+                    ]
+                },
+                {
+                    "title": "GeoNet",
+                    "category": "Scientific AI",
+                    "headline": "Four generations of seismic inversion research.",
+                    "description": "Systematic architecture scaling, failure analysis, Swin-UNet experiments and transition toward Physics-Informed Neural Networks.",
+                    "metrics": [
+                        "467K → 12M parameters",
+                        "4 research iterations",
+                        "Physics-guided learning",
+                        "OpenFWI"
+                    ]
+                },
+                {
+                    "title": "Arqen",
+                    "category": "Production AI",
+                    "headline": "AI image generation platform.",
+                    "description": "Built full-stack SaaS with GPU-backed inference, authentication, payments and cloud deployment.",
+                    "metrics": [
+                        "Modal GPUs",
+                        "AWS S3",
+                        "MongoDB",
+                        "Next.js"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "engineering",
+            "title": "Engineering Highlights",
+            "type": "grid",
+            "items": [
+                {
+                    "title": "Training Systems",
+                    "points": [
+                        "Distributed GPU training",
+                        "Mixed precision",
+                        "Checkpoint recovery",
+                        "Gradient accumulation",
+                        "Cosine scheduling"
+                    ]
+                },
+                {
+                    "title": "LLM Systems",
+                    "points": [
+                        "Transformers",
+                        "LoRA / QLoRA",
+                        "KV Cache",
+                        "RAG",
+                        "Inference optimization"
+                    ]
+                },
+                {
+                    "title": "Scientific ML",
+                    "points": [
+                        "Physics-guided learning",
+                        "Computer Vision",
+                        "Signal Processing",
+                        "Geophysical inversion"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "research",
+            "title": "Research Log",
+            "type": "blog",
+            "items": [
+                {
+                    "title": "Why GeoNet v3 Failed",
+                    "status": "Published"
+                },
+                {
+                    "title": "Building a GPT from Scratch",
+                    "status": "Published"
+                },
+                {
+                    "title": "Physics > Bigger Models",
+                    "status": "Draft"
+                },
+                {
+                    "title": "Training Infrastructure Lessons",
+                    "status": "Draft"
+                }
+            ]
+        },
+        {
+            "id": "writing",
+            "title": "Things I'm Thinking About",
+            "type": "list",
+            "items": [
+                "Scientific foundation models",
+                "Efficient Transformer training",
+                "Inference optimization",
+                "Physics-informed deep learning",
+                "AI systems engineering",
+                "Evaluation over benchmarks"
+            ]
+        },
+        {
+            "id": "experience",
+            "title": "Experience",
+            "type": "timeline",
+            "items": [
+                {
+                    "company": "Bright Bots",
+                    "role": "Machine Learning Engineer",
+                    "date": "2026"
+                },
+                {
+                    "company": "Freelance",
+                    "role": "Inference API Engineer",
+                    "date": "2025"
+                },
+                {
+                    "company": "Unified Mentors",
+                    "role": "ML Intern",
+                    "date": "2025"
+                }
+            ]
+        },
+        {
+            "id": "contact",
+            "title": "Let's Build Something",
+            "type": "contact",
+            "email": "ashish.raj.dev04@gmail.com",
+            "github": "AshishRaj04",
+            "linkedin": "i-ashish-raj"
+        }
+    ]
+}

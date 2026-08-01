@@ -12,20 +12,45 @@ const projectType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      description: 'e.g. Foundation Models, Scientific AI, Production AI',
+    }),
+    defineField({
+      name: 'headline',
+      title: 'Headline',
+      type: 'string',
+      description: 'Short impactful summary line',
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'metrics',
+      title: 'Metrics / Highlights',
+      type: 'array',
+      of: [{type: 'string'}],
+      description: 'Key quantifiable metrics or feature highlights',
+    }),
+    defineField({
       name: 'tags',
-      title: 'Tags',
+      title: 'Tags / Tech Stack',
       type: 'array',
       of: [{type: 'string'}],
     }),
     defineField({
+      name: 'order',
+      title: 'Display Order',
+      type: 'number',
+      initialValue: 0,
+    }),
+    defineField({
       name: 'link',
-      title: 'Project Link',
+      title: 'Project Link / GitHub',
       type: 'url',
     }),
     defineField({
@@ -41,4 +66,5 @@ const projectType = defineType({
   ],
 })
 
-export  {projectType}
+export {projectType}
+
