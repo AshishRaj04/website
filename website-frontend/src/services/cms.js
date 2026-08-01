@@ -3,7 +3,7 @@ import { client } from "../sanity/client";
 const BLOG_POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-  && status == "Published"
+  && (!defined(status) || status != "Draft")
 ]|order(publishedAt desc)[0...12]{
   _id, 
   title, 
